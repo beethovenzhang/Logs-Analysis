@@ -14,10 +14,8 @@ def most_popular_articles():
     '''Answers the first question about the most popular articles'''
     db = psycopg2.connect(database=dbname)
     c = db.cursor()
-    c.execute("""select SUBSTRING(path,10) as article,
-    count(*) as views from lightlog
-    where status='200 OK' and path != '/'
-    group by path
+    c.execute("""select title, views from articles, popular_articles
+    where popular_articles.article=articles.slug
     order by views desc
     limit 3""")
     res = c.fetchall()
@@ -30,7 +28,8 @@ def most_popular_authors():
     '''Answers the second question about the most popular ariticle authors'''
     db = psycopg2.connect(database=dbname)
     c = db.cursor()
-    c.execute("""select name,sum(views) as total_views from author_slug, popular_articles
+    c.execute("""select name,sum(views) as total_views
+    from author_slug, popular_articles
     where author_slug.slug=popular_articles.article
     group by name
     order by total_views desc;""")
