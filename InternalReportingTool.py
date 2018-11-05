@@ -18,14 +18,25 @@ def most_popular_articles():
     count(*) as views from lightlog
     where status='200 OK' and path != '/'
     group by path
-    order by views desc""")
+    order by views desc
+    limit 3""")
     res = c.fetchall()
     db.close()
     print_results(res, 'views')
 
 
-#def most_popular_authors():
-
+def most_popular_authors():
+    '''Answers the second question about the most popular articles'''
+    db = psycopg2.connect(database=dbname)
+    c = db.cursor()
+    c.execute("""select SUBSTRING(path,10) as article,
+    count(*) as views from lightlog
+    where status='200 OK' and path != '/'
+    group by path
+    order by views desc""")
+    res = c.fetchall()
+    db.close()
+    print_results(res, 'views')
 
 #def days_of_more_errors():
 
