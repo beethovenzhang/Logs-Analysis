@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 # This is an internal reporting tool that answers the following
 # three questions about the news database:
 
