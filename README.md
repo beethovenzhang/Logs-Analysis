@@ -7,6 +7,15 @@ This is an internal reporting tool to analyze logs from the `news` database. It 
 2. Who are the most popular article authors of all time?
 3. On which days did more than 1% of requests lead to errors?
 
+## Install Python 3
+You need Python 3 to run this code. To download, use this [link](https://www.python.org/downloads/).
+
+## Set up the virtual machine
+You can run this code in a Linux-based virtual machine (VM) which will give you the PostgreSQL database and support software needed. You need tools called `Vagrant` and `VirtualBox` to install and manage the VM. Follow the instructions in this [link](https://classroom.udacity.com/courses/ud197/lessons/3423258756/concepts/14c72fe3-e3fe-4959-9c4b-467cf5b7c3a0) to set up the virtual machine. (You should also check out [Udacity](https://www.udacity.com) which is an awesome online education website.)
+
+## Download the data
+Next, download the data [here](https://d17h27t6h515a5.cloudfront.net/topher/2016/August/57b5f748_newsdata/newsdata.zip). You will need to unzip this file after downloading it. The file inside is called `newsdata.sql`. Put this file into the `vagrant` directory, which is shared with your virtual machine.
+
 ## Usage
 In an environment that already contains the `news` database and has Python 3 and its module `pycopg2` installed, run the following command in the command line:
 ```
