@@ -14,7 +14,10 @@ dbname = "news"
 
 def most_popular_articles():
     '''Answers the first question about the most popular articles'''
-    db = psycopg2.connect(database=dbname)
+    try:
+        db = psycopg2.connect(database=dbname)
+    except psycopg2.Error:
+        print("Unable to connect to the database")
     c = db.cursor()
     c.execute("""select title, views from articles, popular_articles
     where popular_articles.article=articles.slug
@@ -28,7 +31,10 @@ def most_popular_articles():
 
 def most_popular_authors():
     '''Answers the second question about the most popular ariticle authors'''
-    db = psycopg2.connect(database=dbname)
+    try:
+        db = psycopg2.connect(database=dbname)
+    except psycopg2.Error:
+        print("Unable to connect to the database")
     c = db.cursor()
     c.execute("""select name,sum(views) as total_views
     from author_slug, popular_articles
@@ -43,7 +49,10 @@ def most_popular_authors():
 
 def days_of_more_errors():
     '''Answers the third question about the days with more errors'''
-    db = psycopg2.connect(database=dbname)
+    try:
+        db = psycopg2.connect(database=dbname)
+    except psycopg2.Error:
+        print("Unable to connect to the database")
     c = db.cursor()
     c.execute("""select error_count.date,
     CAST(errors as decimal(10))/CAST(normals as decimal(10)) as error_ratio
